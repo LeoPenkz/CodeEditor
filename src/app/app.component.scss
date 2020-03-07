@@ -1,0 +1,10 @@
+.editor-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  div {
+    flex: 1 30%;
+    padding: 5px;
+  }
+}

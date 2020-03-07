@@ -1,0 +1,22 @@
+{
+  "name": "code-editor",
+  "version": "0.0.1",
+  "description": "Angular 2+ CodeEditor Component",
+  "author": "Leonardo Penques de Faria",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular2",
+    "component",
+    "Code Editor",
+    "codemirror"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/forms": "^7.2.0"
+  },
+  "dependencies": {
+    "codemirror": "^5.52.0"
+  }
+}

@@ -1,0 +1,84 @@
+:host::ng-deep svg {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+  //width: 50px;
+  //height: 50px;
+}
+
+:host.size-lg::ng-deep svg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+:host.border::ng-deep svg {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+:host.size-xs::ng-deep svg { font-size: 0.75em;}
+:host.size-sm::ng-deep svg { font-size: 0.875em; }
+:host.size-1x::ng-deep svg { font-size: 1em; }
+:host.size-2x::ng-deep svg { font-size: 2em; }
+:host.size-3x::ng-deep svg { font-size: 3em; }
+:host.size-4x::ng-deep svg { font-size: 4em; }
+:host.size-5x::ng-deep svg { font-size: 5em; }
+:host.size-6x::ng-deep svg { font-size: 6em; }
+:host.size-7x::ng-deep svg { font-size: 7em; }
+:host.size-8x::ng-deep svg { font-size: 8em; }
+:host.size-9x::ng-deep svg { font-size: 9em; }
+:host.size-10x::ng-deep svg { font-size: 10em; }
+
+:host.fw::ng-deep svg { width: 1.25em; }
+
+:host.spin::ng-deep svg {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+:host.pulse::ng-deep svg {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+:host.rotate-90::ng-deep svg {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+:host.rotate-180::ng-deep svg {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+:host.rotate-270::ng-deep svg {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
