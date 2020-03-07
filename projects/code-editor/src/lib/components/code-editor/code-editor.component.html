@@ -1,11 +1,13 @@
-<code-editor-toolbar
-  *ngIf="showToolbar"
-></code-editor-toolbar>
+<div class="code-editor-wrapper">
+  <code-editor-toolbar
+    *ngIf="showToolbar"
+  ></code-editor-toolbar>
 
-<textarea
-  #codeEditor
-></textarea>
+  <textarea
+    #codeEditor
+  ></textarea>
 
-<code-editor-footer
-  *ngIf="showFooter"
-></code-editor-footer>
+  <code-editor-footer
+    *ngIf="showFooter"
+  ></code-editor-footer>
+</div>

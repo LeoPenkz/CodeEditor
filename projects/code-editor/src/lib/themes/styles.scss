@@ -1,7 +1,10 @@
-@import "../../../node_modules/codemirror/lib/codemirror.css";
-//@import "light.scss";
+@import "codeMirror";
 @import "dark.scss";
 
+.code-editor-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+}
 
 // Code Editor Toolbar
 .code-editor-toolbar {
