@@ -30,22 +30,26 @@
 
   .editor-panel {
     display: flex;
+    flex: 1;
     flex-direction: row;
-
 
     .editor-icons {
       display: flex;
-      padding: 0 5px;
-      align-self: center;
+      align-self: stretch;
+      align-items: center;
+
+
+      :hover {
+        cursor: pointer;
+        background-color: #00bb00;
+      }
 
       code-editor-icon {
-        margin: 0 5px;
-        flex-shrink: 1;
-        //padding: 5px;
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        padding: 0 3px;
 
-        :hover {
-          cursor: pointer;
-        }
       }
 
     }

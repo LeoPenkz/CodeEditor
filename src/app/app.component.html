@@ -1,33 +1,38 @@
 <form [formGroup]="formGroup">
-<div class="editor-grid">
+  <div class="editor-grid">
 
-  <div>
-    <h2>Text Editor</h2>
-    <code-editor
-      show-footer
-      show-toolbar
-      formControlName="text"
+    <div>
+      <h2>Text Editor</h2>
+      <code-editor
+        show-footer
+        show-toolbar
+        formControlName="text"
+      ></code-editor>
+      {{formGroup.controls.text.value}}
+    </div>
 
-    ></code-editor>
-  </div>
-  <div>
-    <h2>SQL Editor</h2>
-    <code-editor
-      show-footer
-      show-toolbar
-      formControlName="sql"
-      code="SQL"
-    ></code-editor>
-  </div>
-  <div>
-    <h2>PHP Editor</h2>
-    <code-editor
-      show-footer
-      show-toolbar
-      formControlName="php"
-      code="PHP"
-    ></code-editor>
+    <div>
+      <h2>SQL Editor</h2>
+      <code-editor
+        show-footer
+        show-toolbar
+        formControlName="sql"
+        code="SQL"
+      ></code-editor>
+      {{formGroup.controls.sql.value}}
+    </div>
+
+    <div>
+      <h2>PHP Editor</h2>
+      <code-editor
+        show-footer
+        show-toolbar
+        formControlName="php"
+        code="PHP"
+      ></code-editor>
+      {{formGroup.controls.php.value}}
+    </div>
+
   </div>
 
-</div>
 </form>

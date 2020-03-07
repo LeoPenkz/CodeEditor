@@ -76,7 +76,7 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
       lineNumbers: true,
       matchBrackets : true,
       autofocus: true,
-      theme: 'darcula'
+      theme: 'ayu-dark'
     };
 
     this.codeEditorInit(this.config);
