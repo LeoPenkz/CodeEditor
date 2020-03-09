@@ -134,11 +134,9 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
   writeValue(value) {
     this.value = value || '';
-    if (!this.instance) {
-      console.log('Editor Instance not found!');
-      return;
+    if (this.instance) {
+      this.instance.setValue(this.value);
     }
-    this.instance.setValue(this.value);
   }
 
   changeMode(editorMode: EditorMode) {
