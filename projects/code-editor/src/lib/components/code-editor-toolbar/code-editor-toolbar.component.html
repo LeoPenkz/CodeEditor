@@ -15,13 +15,15 @@
       <code-editor-icon icon="eye"></code-editor-icon>
     </div>
 
-    <select (change)="changeMode()">
-      <option>Selecione</option>
+    <select
+      [(ngModel)]="mode"
+      (change)="changeMode($event)"
+    >
+      <option *ngFor="let mode of modesList">
+        {{mode}}
+      </option>
     </select>
   </div>
-
-
-
 
 </div>
 

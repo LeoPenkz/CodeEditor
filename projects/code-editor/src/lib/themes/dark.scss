@@ -49,4 +49,7 @@
 .code-editor-footer {
   background-color: #1a1a1a;
   color: #ecf0f1;
+  div:not(:first-child)::before {
+    background-color: #ecf0f1;
+  }
 }

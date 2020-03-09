@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/meta.js';
+import {EditorMode} from '../../models/modes';
 
 /**
  * CodeEditor Component
@@ -35,7 +36,7 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
   @BooleanInput @Input('show-toolbar') showToolbar: boolean;
   @BooleanInput @Input('show-footer') showFooter: boolean;
 
-  @Input() code: string = 'Textile';
+  @Input() code: EditorMode = 'Textile';
 
   @Output() change = new EventEmitter();
   @Output() focus = new EventEmitter();
@@ -45,13 +46,13 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
   @ViewChild('codeEditor') codeEditor;
 
   @Input() config;
-  @Input() set model(v) {
+  @Input() public set model(v) {
     if (v !== this.value) {
       this.value = v;
       this.onChange(v);
     }
   }
-  get model() {
+  public get model() {
     return this.value;
   }
 
@@ -60,7 +61,6 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
   private mode: any;
 
   constructor(
-    // private editorService: CodeEditorService
   ) {}
 
   ngOnDestroy() { }
@@ -113,7 +113,7 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
       })
       .catch((r) => {
-        console.log(r);
+        throw new Error(r);
       })
     ;
 
@@ -131,6 +131,25 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
       this.instance.setValue(this.value);
     }
   }
+
+  changeMode(editorMode: EditorMode) {
+    try {
+      const mode = CodeMirror.findModeByName(editorMode);
+      if (!mode) throw new Error(`Mode [${editorMode}] not found!`);
+
+      import(`codemirror/mode/${mode.mode}/${mode.mode}`)
+        .then(() => {
+
+          this.instance.setOption('mode', mode.mimes ? mode.mimes[0] : mode.mime);
+
+          this.code = editorMode;
+          this.mode = mode;
+        });
+    } catch (er) {
+      console.log(`[ERROR] => ${er}` );
+    }
+  }
+
   onChange(_) {}
   onTouched() {}
   registerOnChange(fn) { this.onChange = fn; }

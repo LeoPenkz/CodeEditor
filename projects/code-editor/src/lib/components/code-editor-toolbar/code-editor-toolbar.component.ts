@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {EditorMode} from '../../models/modes';
+import * as CodeMirror from 'codemirror';
+import {CodeEditorComponent} from '../code-editor/code-editor.component';
 
 @Component({
   selector: 'code-editor-toolbar',
@@ -9,12 +12,25 @@ export class CodeEditorToolbarComponent implements OnInit {
 
   @Input() title = 'Code Editor';
 
-  constructor() { }
+  modesList: EditorMode[];
 
-  ngOnInit() {
+  mode: EditorMode;
+
+  private editor: CodeEditorComponent;
+
+  constructor(
+    cmp: CodeEditorComponent
+  ) {
+    this.editor = cmp;
+    this.mode = cmp.code;
   }
 
-  changeMode() {
+  ngOnInit() {
+    this.modesList = CodeMirror.modeInfo.map( m => m.name);
+  }
 
+  changeMode(event) {
+    const mode = event.target.value;
+    this.editor.changeMode(mode);
   }
 }

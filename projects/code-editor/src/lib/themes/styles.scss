@@ -15,29 +15,32 @@
   padding: 5px;
 
   .editor-title {
+
     display: flex;
     flex-grow: 1;
+
+    code-editor-icon {
+      align-self: center;
+      margin: 0 7px 0 0;
+    }
 
     span {
       align-self: center;
     }
 
-    code-editor-icon {
-      margin: 0 7px 0 0;
-    }
-
   }
 
   .editor-panel {
+
     display: flex;
     flex: 1;
     flex-direction: row;
 
     .editor-icons {
+
       display: flex;
       align-self: stretch;
       align-items: center;
-
 
       :hover {
         cursor: pointer;
@@ -55,6 +58,26 @@
     }
   }
 
+}
+
+// Code Editor Footer
+.code-editor-footer {
+
+  padding: 3px 5px;
+
+  div {
+    position: relative;
+    display: inline-block;
+    padding: 0 5px;
+  }
+  div:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
 }
 
 
