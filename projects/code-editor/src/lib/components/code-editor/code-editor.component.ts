@@ -1,5 +1,8 @@
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BooleanInput} from '../../helpers/decorator.input.boolean';
+import {EditorMode} from '../../models/modes';
+import * as CodeMirror from 'codemirror';
+import 'codemirror/mode/meta.js';
 import {
   AfterViewInit,
   Component, EventEmitter,
@@ -9,9 +12,6 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import * as CodeMirror from 'codemirror';
-import 'codemirror/mode/meta.js';
-import {EditorMode} from '../../models/modes';
 
 /**
  * CodeEditor Component
@@ -56,6 +56,8 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
     return this.value;
   }
 
+  modeList = CodeMirror.modeInfo;
+
   private instance = null;
   private value = '';
   private mode: any;
@@ -81,6 +83,11 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
     this.codeEditorInit(this.config);
   }
+
+  onChange(_) {}
+  onTouched() {}
+  registerOnChange(fn) { this.onChange = fn; }
+  registerOnTouched(fn) { this.onTouched = fn; }
 
   codeEditorInit(config) {
 
@@ -127,14 +134,18 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
   writeValue(value) {
     this.value = value || '';
-    if (this.instance) {
-      this.instance.setValue(this.value);
+    if (!this.instance) {
+      console.log('Editor Instance not found!');
+      return;
     }
+    this.instance.setValue(this.value);
   }
 
   changeMode(editorMode: EditorMode) {
     try {
+
       const mode = CodeMirror.findModeByName(editorMode);
+
       if (!mode) throw new Error(`Mode [${editorMode}] not found!`);
 
       import(`codemirror/mode/${mode.mode}/${mode.mode}`)
@@ -144,15 +155,16 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
           this.code = editorMode;
           this.mode = mode;
+
+          console.log(`Mode [${mode.mode}] imported!`);
+        }).catch(reason => {
+          throw new Error(reason);
         });
     } catch (er) {
       console.log(`[ERROR] => ${er}` );
     }
   }
 
-  onChange(_) {}
-  onTouched() {}
-  registerOnChange(fn) { this.onChange = fn; }
-  registerOnTouched(fn) { this.onTouched = fn; }
+
 
 }

@@ -1,3 +1,7 @@
+/**
+ * EditorMode
+ * A list of types for easy setting attributes in component
+ */
 export type EditorMode =
 | 'APL'
 | 'PGP'

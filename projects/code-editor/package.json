@@ -11,10 +11,14 @@
     "Code Editor",
     "codemirror"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeoPenkz/CodeEditor/tree/master/projects/code-editor"
+  },
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0",
-    "@angular/forms": "^7.2.0"
+    "@angular/common": ">=2.1.0",
+    "@angular/core": ">=2.1.0",
+    "@angular/forms": ">=2.1.0"
   },
   "dependencies": {
     "codemirror": "^5.52.0"

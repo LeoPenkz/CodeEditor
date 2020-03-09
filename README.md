@@ -1,7 +1,7 @@
 # CodeEditorApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9
-for tests of [CodeEditor Component Library](projects/code-editor/README.md).
+for tests of [CodeEditor Component Library](projects/code-editor).
 
 ## Development server
 
