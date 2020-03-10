@@ -2,14 +2,18 @@ import {Component, Input, OnInit} from '@angular/core';
 import {EditorMode} from '../../models/modes';
 import {CodeEditorComponent} from '../code-editor/code-editor.component';
 
+/**
+ * EditorToolbar
+ * @desc: For changing editor options
+ */
 @Component({
   selector: 'code-editor-toolbar',
-  templateUrl: './code-editor-toolbar.component.html',
-  styleUrls: []
+  templateUrl: './code-editor-toolbar.component.html'
 })
 export class CodeEditorToolbarComponent implements OnInit {
 
   @Input() title = 'Code Editor';
+
   @Input() showIcon: boolean;
   @Input('change-mode') changeMode: boolean;
 
@@ -24,11 +28,14 @@ export class CodeEditorToolbarComponent implements OnInit {
     cmp: CodeEditorComponent
   ) {
     this.editor = cmp;
+
     this.modeList = cmp.modeList
       .map( m => m.name)
       .sort( (a, b) => a > b ? 1 : -1);
+
     cmp.currentMode
       .subscribe( m => this.mode = m);
+
   }
 
   ngOnInit() {

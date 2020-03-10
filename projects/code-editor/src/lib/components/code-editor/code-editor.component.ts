@@ -1,5 +1,8 @@
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BooleanInput} from '../../helpers/decorator.input.boolean';
+import {EditorMode} from '../../models/modes';
+import * as CodeMirror from 'codemirror';
+import 'codemirror/mode/meta.js';
 import {
   AfterViewInit,
   Component, EventEmitter,
@@ -9,9 +12,6 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import * as CodeMirror from 'codemirror';
-import 'codemirror/mode/meta.js';
-import {EditorMode} from '../../models/modes';
 
 /**
  * CodeEditor Component
@@ -52,6 +52,7 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
     return this.value;
   }
 
+
   @Output() change = new EventEmitter();
   @Output() focus = new EventEmitter();
   @Output() blur = new EventEmitter();
@@ -60,16 +61,15 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
   @ViewChild('codeEditor') codeEditor;
 
+  modeList = CodeMirror.modeInfo;
+
   private instance = null;
   private value = '';
   private mode: any;
   private config: any;
 
-  modeList: any;
-
   constructor(
   ) {
-    this.modeList = CodeMirror.modeInfo;
   }
 
   ngOnDestroy() { }
@@ -90,6 +90,11 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
     this.codeEditorInit(this.config);
   }
+
+  onChange(_) {}
+  onTouched() {}
+  registerOnChange(fn) { this.onChange = fn; }
+  registerOnTouched(fn) { this.onTouched = fn; }
 
   codeEditorInit(config) {
 
@@ -145,7 +150,9 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
   changeEditorMode(editorMode: EditorMode) {
     try {
+
       const mode = CodeMirror.findModeByName(editorMode);
+
       if (!mode) throw new Error(`Mode [${editorMode}] not found!`);
 
       import(`codemirror/mode/${mode.mode}/${mode.mode}`)
@@ -156,19 +163,17 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
           this.code = editorMode;
           this.mode = mode;
 
+          console.log(`Mode [${mode.mode}] imported!`);
           this.currentMode.emit(mode.name);
         })
-        .catch((r) => {
-          throw r;
+        .catch(reason => {
+          throw new Error(reason);
         });
     } catch (er) {
       console.log(`[ERROR] => ${er}` );
     }
   }
 
-  onChange(_) {}
-  onTouched() {}
-  registerOnChange(fn) { this.onChange = fn; }
-  registerOnTouched(fn) { this.onTouched = fn; }
+
 
 }
