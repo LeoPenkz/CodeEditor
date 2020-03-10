@@ -1,8 +1,9 @@
 # CodeEditor
 
 [![Git Hub Release](https://img.shields.io/badge/release-0.0.1-green)](https://github.com/LeoPenkz/CodeEditor)
-![](https://img.shields.io/badge/status-development-yellowgreen)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/LeoPenkz/CodeEditor?label=last%20release)
+![GitHub Release (latest by date)](https://img.shields.io/github/v/release/LeoPenkz/CodeEditor?label=last%20release)
+[![Npm Release](https://img.shields.io/npm/v/@penkz/code-editor)](https://www.npmjs.com/package/@penkz/code-editor)
+
 
 CodeEditor wrappers a CodeMirror editor in a Angular library 
 for use with Angular Forms. Several features have been added 
