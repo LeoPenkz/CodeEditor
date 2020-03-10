@@ -15,6 +15,7 @@
       true,
       "ignore-same-line"
     ],
-    "no-input-rename": false
+    "no-input-rename": false,
+    "no-inferrable-types": false
   }
 }

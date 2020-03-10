@@ -24,6 +24,12 @@
       ],
       "code-editor/*": [
         "dist/code-editor/*"
+      ],
+      "test-build": [
+        "dist/test-build"
+      ],
+      "test-build/*": [
+        "dist/test-build/*"
       ]
     }
   }

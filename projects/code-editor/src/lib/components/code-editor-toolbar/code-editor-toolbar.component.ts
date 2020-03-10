@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EditorMode} from '../../models/modes';
-import * as CodeMirror from 'codemirror';
 import {CodeEditorComponent} from '../code-editor/code-editor.component';
 
 @Component({
@@ -11,10 +10,13 @@ import {CodeEditorComponent} from '../code-editor/code-editor.component';
 export class CodeEditorToolbarComponent implements OnInit {
 
   @Input() title = 'Code Editor';
-
-  modesList: EditorMode[];
+  @Input() showIcon: boolean;
+  @Input('change-mode') changeMode: boolean;
 
   mode: EditorMode;
+  modeList: any;
+
+  selectMode: boolean;
 
   private editor: CodeEditorComponent;
 
@@ -22,15 +24,19 @@ export class CodeEditorToolbarComponent implements OnInit {
     cmp: CodeEditorComponent
   ) {
     this.editor = cmp;
-    this.mode = cmp.code;
+    this.modeList = cmp.modeList
+      .map( m => m.name)
+      .sort( (a, b) => a > b ? 1 : -1);
+    cmp.currentMode
+      .subscribe( m => this.mode = m);
   }
 
   ngOnInit() {
-    this.modesList = CodeMirror.modeInfo.map( m => m.name);
   }
 
-  changeMode(event) {
-    const mode = event.target.value;
-    this.editor.changeMode(mode);
+  changeEditorMode(mode) {
+    this.editor.changeEditorMode(mode);
+    this.selectMode = false;
   }
+
 }

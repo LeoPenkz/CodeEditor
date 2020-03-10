@@ -1,6 +1,8 @@
 <div class="code-editor-wrapper">
   <code-editor-toolbar
     *ngIf="showToolbar"
+    [showIcon]="showToolbarIcons"
+    [change-mode]="changeMode"
   ></code-editor-toolbar>
 
   <textarea

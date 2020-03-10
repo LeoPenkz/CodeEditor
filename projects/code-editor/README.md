@@ -11,7 +11,7 @@ to make it easier to use in your applications.
 Table of contents
 =================
 
-  * [Features](##features)
+  * [Features](#features)
   * [Getting started](#getting-started)
   * [Usage](#usage-sample)
   * [API](#api)

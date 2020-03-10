@@ -7,22 +7,35 @@
 
   <div class="editor-panel">
 
-    <div class="editor-icons">
-      <code-editor-icon icon="eye"></code-editor-icon>
-      <code-editor-icon icon="eye"></code-editor-icon>
-      <code-editor-icon icon="eye"></code-editor-icon>
-      <code-editor-icon icon="eye"></code-editor-icon>
+    <div
+      class="editor-icons"
+      *ngIf="showIcon"
+    >
       <code-editor-icon icon="eye"></code-editor-icon>
     </div>
 
-    <select
-      [(ngModel)]="mode"
-      (change)="changeMode($event)"
+    <div
+      class="mode-changer"
+      *ngIf="changeMode"
+
     >
-      <option *ngFor="let mode of modesList">
-        {{mode}}
-      </option>
-    </select>
+      <div
+        class="mode-selected"
+        (click)="selectMode=!selectMode"
+      >Code</div>
+
+      <ul
+        class="options"
+        [class.selecting]="selectMode"
+      >
+        <li
+          *ngFor="let m of modeList"
+          (click)="changeEditorMode(m)"
+          [class.selected]="m == mode"
+        >{{m}}</li>
+      </ul>
+    </div>
+
   </div>
 
 </div>

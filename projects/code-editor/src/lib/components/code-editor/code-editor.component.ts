@@ -33,19 +33,15 @@ import {EditorMode} from '../../models/modes';
 })
 export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
 
-  @BooleanInput @Input('show-toolbar') showToolbar: boolean;
-  @BooleanInput @Input('show-footer') showFooter: boolean;
-
   @Input() code: EditorMode = 'Textile';
 
-  @Output() change = new EventEmitter();
-  @Output() focus = new EventEmitter();
-  @Output() blur = new EventEmitter();
-  @Output() cursorActivity = new EventEmitter();
+  @BooleanInput @Input('change-mode') changeMode: boolean = true;
 
-  @ViewChild('codeEditor') codeEditor;
+  @BooleanInput @Input('show-footer') showFooter: boolean;
 
-  @Input() config;
+  @BooleanInput @Input('show-toolbar') showToolbar: boolean;
+  @BooleanInput @Input('show-toolbar-icons') showToolbarIcons: boolean = true;
+
   @Input() public set model(v) {
     if (v !== this.value) {
       this.value = v;
@@ -56,12 +52,25 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
     return this.value;
   }
 
+  @Output() change = new EventEmitter();
+  @Output() focus = new EventEmitter();
+  @Output() blur = new EventEmitter();
+  @Output() cursorActivity = new EventEmitter();
+  @Output() currentMode = new EventEmitter();
+
+  @ViewChild('codeEditor') codeEditor;
+
   private instance = null;
   private value = '';
   private mode: any;
+  private config: any;
+
+  modeList: any;
 
   constructor(
-  ) {}
+  ) {
+    this.modeList = CodeMirror.modeInfo;
+  }
 
   ngOnDestroy() { }
 
@@ -111,9 +120,11 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
           this.blur.emit({instance, event});
         });
 
+        this.currentMode.emit(mode.name);
+
       })
       .catch((r) => {
-        throw new Error(r);
+        throw r;
       })
     ;
 
@@ -132,7 +143,7 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
     }
   }
 
-  changeMode(editorMode: EditorMode) {
+  changeEditorMode(editorMode: EditorMode) {
     try {
       const mode = CodeMirror.findModeByName(editorMode);
       if (!mode) throw new Error(`Mode [${editorMode}] not found!`);
@@ -144,6 +155,11 @@ export class CodeEditorComponent implements AfterViewInit, OnDestroy, ControlVal
 
           this.code = editorMode;
           this.mode = mode;
+
+          this.currentMode.emit(mode.name);
+        })
+        .catch((r) => {
+          throw r;
         });
     } catch (er) {
       console.log(`[ERROR] => ${er}` );
